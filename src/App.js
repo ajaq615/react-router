@@ -5,8 +5,11 @@ import {
   //createRoutesFromElements,
   //Route
 } from 'react-router-dom';
+import ErrorPage from './pages/Error';
 import HomePage from './pages/Home';
+import ProductDetails from './pages/ProductDetails';
 import Products from './pages/Products';
+import RootLayout from './pages/Root';
 
 //FOR JSX/COMPONENT-based way of defining routes (old version)
 // const routeDefinitions = createRoutesFromElements(
@@ -20,8 +23,16 @@ import Products from './pages/Products';
 
 //OBJECT-based way of defining routes
 const router = createBrowserRouter([
-  { path: '/', element: <HomePage /> },
-  { path: '/products', element: <Products /> },
+  {
+    path: '/',
+    element: <RootLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: '/', element: <HomePage /> },
+      { path: '/products', element: <Products /> },
+      { path: '/products/:productId', element: <ProductDetails /> },
+    ]
+  },
 ]);
 
 function App() {
